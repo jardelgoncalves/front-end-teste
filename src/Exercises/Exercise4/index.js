@@ -21,7 +21,17 @@
 //   ]
 
 function fizzBuzz(number) {
-  //you code here...
+  const numbers = []
+
+  for(let index = 1; index <= number; index++) {
+    if (index % 3 === 0 && index % 5 === 0) numbers.push('FizzBuzz')
+    else if (index % 3 === 0) numbers.push('Fizz')
+    else if (index % 5 === 0) numbers.push('Buzz')
+    
+    numbers.push(index)
+  }
+  
+  return numbers
 }
 
 module.exports = fizzBuzz;
