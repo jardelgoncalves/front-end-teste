@@ -8,7 +8,8 @@
 // checkIfTheFirstLetterIsUppercase("Deu Certo!") --> true
 
 function checkIfTheFirstLetterIsUppercase(word) {
-  //you code here...
+  // ou poderia usar a tabela ASCII word.charCodeAt(0) >= 65 && word.charCodeAt(0) <= 90
+  return word.charAt(0) === word.charAt(0).toUpperCase()
 }
 
 module.exports = checkIfTheFirstLetterIsUppercase;
