@@ -17,7 +17,7 @@
 
 // "Nanananananananananana Batman!" --> "##########################man!"
 function maskify(string) {
-  //you code here...
+  return string.slice(-4).padStart(string.length, '#')
 }
 
 module.exports = maskify;
