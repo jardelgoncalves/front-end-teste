@@ -3,10 +3,9 @@ import 'h8k-components'
 
 import { image1, image2, image3, image4 } from './assets/images'
 import { Thumbs, Viewer } from './components'
+import { useSliderInterval } from './hooks/useSliderInterval'
 
 const title = 'Catalog Viewer'
-
-
 
 
 function App() {
@@ -34,6 +33,29 @@ function App() {
   const [slideTimer, setSlideTimer] = useState(false)
   const [slideDuration] = useState(3000)
 
+  const handleNext = () => {
+    const lastButOne = catalogs.length - 1
+    if (activeIndex === lastButOne) {
+      setActiveIndex(0)
+      return
+    }
+    setActiveIndex(oldValue => oldValue + 1)
+  }
+
+  const handlePrev = () => {
+    if (activeIndex === 0) {
+      setActiveIndex(catalogs.length - 1)
+      return
+    }
+    setActiveIndex(oldValue => oldValue - 1)
+  }
+
+  const handleCheck = (e) => {
+    const { target: { checked }} = e
+    setSlideTimer(checked)
+  }
+
+  useSliderInterval(handleNext, slideDuration, !!slideTimer)
 
   return (
     <Fragment>
@@ -46,16 +68,21 @@ function App() {
               <button
                 className="icon-only outlined"
                 data-testid="prev-slide-btn"
+                aria-label='prev'
+                onClick={handlePrev}
               >
                 <i className="material-icons">arrow_back</i>
               </button>
               <Thumbs
                 items={catalogs}
                 currentIndex={activeIndex}
+                onThumbClick={setActiveIndex}
               />
               <button
                 className="icon-only outlined"
                 data-testid="next-slide-btn"
+                aria-label='next'
+                onClick={handleNext}
               >
                 <i className="material-icons">arrow_forward</i>
               </button>
@@ -66,6 +93,8 @@ function App() {
           <input
             type='checkbox'
             data-testid='toggle-slide-show-button'
+            checked={slideTimer}
+            onChange={handleCheck}
           />
           <label className='ml-6'>Start Slide Show</label>
         </div>
