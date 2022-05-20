@@ -1,5 +1,8 @@
 # Getting Started with Create React App
 
+[![CI](https://github.com/jardelgoncalves/front-end-teste/workflows/CI/badge.svg)](https://github.com/jardelgoncalves/front-end-teste/actions)
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
