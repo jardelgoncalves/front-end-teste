@@ -12,7 +12,12 @@
 // --> saida: { name: "Camiseta Polo", price: 59.9, amount: 30 }
 
 function updateData(currentObject, newDataObject) {
-  //you code here...
+  for (const property in newDataObject) {
+    if(property in currentObject) {
+      currentObject[property] = newDataObject[property]
+    }
+  }
+  return currentObject
 }
 
 module.exports = updateData;
