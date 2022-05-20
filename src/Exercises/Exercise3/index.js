@@ -37,8 +37,39 @@
 //   }
 // ]
 
+const charactersNames = Object.freeze([
+  "Rick Sanchez",
+  "Morty Smith",
+  "Summer Smith",
+  "Beth Smith",
+  "Jerry Smith"
+])
+
+function translate(string) {
+  const localeMap = {
+    'Human': 'Humano',
+    'Male': 'Homem',
+    'Female': 'Mulher',
+  }
+
+  return localeMap[string]
+}
+
 async function getRicAndMortyCharacters() {
-  //you code here...
+  const response = await fetch('https://rickandmortyapi.com/api/character')
+  const data = await response.json()
+
+  return data.results.reduce((characters, character) => {
+    if(charactersNames.includes(character.name)) {
+      characters.push({
+        nome: character.name,
+        genero: translate(character.gender),
+        avatar: character.image,
+        especie: translate(character.species)
+      })
+    }
+    return characters
+  }, [])
 }
 
 module.exports = getRicAndMortyCharacters;
